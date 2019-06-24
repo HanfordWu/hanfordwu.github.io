@@ -1,0 +1,126 @@
+* {
+	margin: 0px; padding: 0px;
+}
+html {
+	height: 100%;
+}
+body {
+	height: 100%;
+}
+body {
+	font: 13.34px/normal helvetica, arial, clean, sans-serif; text-align: center; font-size-adjust: none; font-stretch: normal; background-color: white;
+}
+h1 {
+	font-size: 100%;
+}
+h2 {
+	font-size: 100%;
+}
+h3 {
+	font-size: 100%;
+}
+h4 {
+	font-size: 100%;
+}
+h5 {
+	font-size: 100%;
+}
+h6 {
+	font-size: 100%;
+}
+h1 {
+	margin-bottom: 1em;
+}
+p {
+	margin: 1em 0px;
+}
+a {
+	color: rgb(0, 0, 170);
+}
+a:hover {
+	color: black;
+}
+a:visited {
+	color: rgb(170, 0, 170);
+}
+table {
+	font-size: inherit;
+}
+ul.posts {
+	margin-bottom: 2em; list-style-type: none;
+}
+ul.posts li {
+	line-height: 1.75em;
+}
+ul.posts span {
+	color: rgb(170, 170, 170); font-family: Monaco, "Courier New", monospace; font-size: 80%;
+}
+.site {
+	margin: 3em auto 2em; width: 42em; text-align: justify; line-height: 1.5em; font-size: 110%;
+}
+.title {
+	color: rgb(170, 0, 0); font-weight: bold; margin-bottom: 2em;
+}
+.site .title a {
+	color: rgb(170, 0, 0); text-decoration: none;
+}
+.site .title a:hover {
+	color: black;
+}
+.site .title a.extra {
+	color: rgb(170, 170, 170); text-decoration: none; margin-left: 1em;
+}
+.site .title a.extra:hover {
+	color: black;
+}
+.site .meta {
+	color: rgb(170, 170, 170);
+}
+.site .footer {
+	color: rgb(102, 102, 102); overflow: hidden; font-size: 80%; margin-top: 2em; border-top-color: rgb(238, 238, 238); border-top-width: 4px; border-top-style: solid;
+}
+.site .footer .contact {
+	margin-right: 3em; float: left;
+}
+.site .footer .contact a {
+	color: rgb(128, 133, 193);
+}
+.site .footer .rss {
+	margin-top: 1.1em; margin-right: -0.2em; float: right;
+}
+.site .footer .rss img {
+	border: 0px currentColor; border-image: none;
+}
+#post {
+	
+}
+#post pre {
+	padding: 0px 0.4em; border: 1px solid rgb(221, 221, 221); border-image: none; background-color: rgb(238, 238, 255);
+}
+#post ul {
+	margin-left: 1.35em;
+}
+#post ol {
+	margin-left: 1.35em;
+}
+#post code {
+	padding: 0px 0.2em; border: 1px solid rgb(221, 221, 221); border-image: none; font-size: 85%; background-color: rgb(238, 238, 255);
+}
+#post pre code {
+	border: currentColor; border-image: none;
+}
+#post img {
+	padding: 1em 0px; max-width: 42em;
+}
+#post pre.terminal {
+	border: 1px solid black; border-image: none; color: white; background-color: rgb(51, 51, 51);
+}
+#post pre.terminal code {
+	background-color: rgb(51, 51, 51);
+}
+#related {
+	margin-top: 2em;
+}
+#related h2 {
+	margin-bottom: 1em;
+}
