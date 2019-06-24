@@ -23,12 +23,14 @@ share:
   fb_appid: 1749788565247320
 
 urls:
-    - text: About Me
-      url: /about/
+    - text: My Posts
+      url: /post/
     - text: My Projects
       url: /projects/
-    - text: My Posts
-      url: /posts/
+    - text: My Life
+      url: /life/
+    - text: About Me
+      url: /about/
 
 url: "https://hanfordwu.github.io"
 baseurl: ""
