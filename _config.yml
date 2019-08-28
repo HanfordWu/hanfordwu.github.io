@@ -27,6 +27,8 @@ urls:
       url: /projects/
     - text: About Me
       url: /about/
+    - text: Github
+      url: 'https://github.com/HanfordWu'
 
 url: "https://hanfordwu.github.io"
 baseurl: ""
