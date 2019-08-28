@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Start Digital Signal Processing
 date: 2019-08-15
 ---
