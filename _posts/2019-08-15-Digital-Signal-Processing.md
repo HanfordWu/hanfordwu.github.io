@@ -3,11 +3,6 @@ layout: post
 title: Start Digital Signal Processing
 date: 2019-08-15
 ---
-
-
-
-# Start Digital Signal Processing
-
 I had no idea about what DSP is before I took it. I learned 'Signal and System' when I was in school, but it's almost ten years ago. Signal and System is more about analog signals, indeed, electricity generation and transmission are all analog signal processing. I know transient state, steady state, a little Fourier transform and Laplace transform. But I really don't know digital filters, the use of differential equations, DFT, etc. Anyway, I don't have many choice in summer, so I took it.
 
 I find something exciting when I start to read the textbook. First, Everyone knows the Artificial Intelligence is the future, Machine Learning is the way of tomorrow.  Machines learn something from information, but they are not like humans brain, they are picky and dumb. We must do signal processing so that we can give machine information that is understandable for it and good enough. There are many algorithms to make the information more valuable. So, signal processing is came up. Furthermore, we have no doubt that digital signals are much more popular than analog signals in terms of many ways, for many years. Second, DSP is widely used in many industries, communication, image and video processing, medical care and diagnosis. Last semester, I took 'Broadcast signal transmission', I did it well, but it's just a understanding of wireless communication and a brief system design, I don't really understand the details of many techniques. For example, modulation, encoding, or match filter. They are all DSP related topics. So, DSP is gonna help me to understand them.
