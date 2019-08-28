@@ -23,12 +23,8 @@ share:
   fb_appid: 1749788565247320
 
 urls:
-    - text: My Posts
-      url: /post/
     - text: My Projects
       url: /projects/
-    - text: My Life
-      url: /life/
     - text: About Me
       url: /about/
 
