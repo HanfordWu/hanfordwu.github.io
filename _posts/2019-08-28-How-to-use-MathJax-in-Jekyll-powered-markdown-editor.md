@@ -17,7 +17,7 @@ I came across a problem that Github page can't interpret MathJax syntax. I find 
          }
        },
        tex2jax: {
-         inlineMath: [ ['$','$'], ['\(', '\)'] ],
+         inlineMath: [ ['$','$'] ],
          displayMath: [ ['$$','$$'] ],
          processEscapes: true,
        }
@@ -28,12 +28,11 @@ I came across a problem that Github page can't interpret MathJax syntax. I find 
    </script>
    ```
 
-   2. Find the layout file you are gonna write equation into, add following codes before "``</header>``" (This is the end of the header part).
+2. Find the layout file you are gonna write equation into, add following codes before "``</header>``" (This is the end of the header part).
 
-```html
-{% if page.use_math %}
-   {% include mathjax_support.html %}
-{% endif %}
-```
-
-​		  3. Add front matter in the post file ``use_math: true``.
+	```html
+		{% if page.use_math %}
+  		 {% include mathjax_support.html %}
+		{% endif %}
+	```
+3.  Add front matter in the post file ``use_math: true``.
