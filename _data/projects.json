@@ -17,10 +17,10 @@
 	},
 	{
 		"slug": "ELEC6891",		
-		"name": "ELEC6891:Broadcast System Design",
+		"name": "ELEC6891: Broadcast System Design",
 		"image": "ELEC6891.jpg",
 		"url": "/project/ELEC6891-project/",
-		"date": "June 2014",
+		"date": "June 2019",
 		"tags": ["Matlab"]
 	},
 	{
@@ -30,17 +30,5 @@
 		"url":"/project/ELEC6601-project/",
 		"date": "Aug 2019",
 		"tags": ["Matlab"]
-	},
-	{
-		"name": "Cool project 5",
-		"image": "placeholder.jpg",
-		"date": "Oct 2016",
-		"tags": ["Python","nodejs"]
-	},
-	{
-		"name": "Cool project 6",
-		"image": "placeholder.jpg",
-		"date": "Oct 2016",
-		"tags": ["Python","nodejs"]
-	}
+	}	
 ]

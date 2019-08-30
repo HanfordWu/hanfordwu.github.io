@@ -1,6 +1,7 @@
 ---
 layout: project_single
 title:  "ELEC6891: Broadcast System Design"
+date: 2019-06-20
 slug: "ELEC6891"
 use_math: true
 ---
@@ -10,7 +11,6 @@ use_math: true
 **Abstract**—This project has designed a terrestrial broadcasting system for a medium company. The system has two broadcasting stations, providing one 4K or at least HD program to the users between Ottawa and Montreal. This project adopts ATSC 3.0 digital television standard. Based on ATSC 3.0, we are using LDPC code as the FEC channel coding scheme. By Layer Division Multiplexing ( LDM ), we provide HD and 4K service to the users. On the receiver end, we find the required Signal Noise Ratio, receiving components’ gains and temperature. Then we do link budget to find the transmitting power. Finally, we implement this design in MATLAB by using a picture, the results of simulation are showed in this report.
 
 <p style="text-align: center;"> I.	Introduction </p>
-
 There are mainly four Digital TV (DTV) standards:
 
 - DVB: Digital Video Broadcasting. 
@@ -21,7 +21,6 @@ There are mainly four Digital TV (DTV) standards:
 The latest territorial versions of these standards are: DVB-T2, ATSC 3.0, DTMB-T, ISDB-T. This project adopts ATSC 3.0 as digital TV standard.
 
 <p style="text-align: center;"> II.	System Design </p>
-
 ​	A. Service Type
 
 First, we select the resolution and frame rate. From the project description, we want to broadcast 4K or at least HD indoor TV streaming. There are few different formats to deliver HD program, in case of 16:9 aspect ratio, we select 1920x1080 progressive scanning (1080p) to be HD type. For the resolution of 4K, we select 3840×2160p. In the North America, according to the electricity frequency, we select 60 frames per second [2]. 
@@ -107,7 +106,6 @@ From the above discussion, we can determine the overall system parameters as fol
 <img src="{{site.baseurl}}/assets/img/1567030911539.png">
 
 <p style="text-align: center;"> III. Link Budget </p>
-
 This project is using the following simple mode to do link budget calculation:
 
 <img src="{{site.baseurl}}/assets/img/linkbudget.png">
