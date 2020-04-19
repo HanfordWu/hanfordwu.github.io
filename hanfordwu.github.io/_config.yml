@@ -1,0 +1,48 @@
+title: Posts
+description: My Personal Blog
+author: Haifeng Wu
+github: https://github.com/HanfordWu
+about: I'm an Electrical and Computer engineer. Here is what I'm learning.
+disqus_shortname: Blog
+google_analytics: UA-XXXXXXXX-Y
+avatar_url: /static/img/avatar.jpg
+
+enableTags: true
+tagarray: []
+
+collections:
+  project:
+    output: true
+    permalink: /project/:path/
+
+social:
+    - icon: fa-linkedin
+      link: "https://www.linkedin.com/in/hanford-wu-555aa8182/"
+share:
+  twitter_username: github.io
+  fb_appid: 1749788565247320
+
+urls:
+    - text: My Projects
+      url: /projects/
+    - text: About Me
+      url: /about/
+    - text: Github
+      url: 'https://github.com/HanfordWu'
+
+url: "https://hanfordwu.github.io"
+baseurl: ""
+paginate: 20
+per_page: 20
+paginate_path: "/page/:num/"
+markdown: kramdown
+gems:
+  - jekyll-paginate
+  - jekyll-gist
+
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+  endings: all
+  ignore:
+    envs: ['development']
