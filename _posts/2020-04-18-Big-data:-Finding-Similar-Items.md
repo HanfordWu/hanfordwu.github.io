@@ -1,6 +1,8 @@
 **Data Format(Example):**
 Text documents
+
 **Goal**: Given a large number(millions or billions) of documents, find similar documents.
+
 **Note:**
 We are finding near neighbors in high-dimension, so there must be a distance metric. This article is talking about Jaccard similarity:
 $$sim(C1, C2) = \frac{|C1 \bigcap C2|}{|C1 \bigcup C2|}$$
@@ -69,6 +71,7 @@ So the prob. that both are true is the prob. $y\in C1 \bigcap C2$
 Therefore:
 $$Pr[min(\pi(C1))=min(\pi(C2))]=|C1\bigcap C2|/|C1\bigcup C2|$$
 This is exactly the Jaccard similarity.
+
 **Conclusion:**
 The similarity of two columns(documents) is the fraction of the hash values where they are equal in signature matrix.
 
@@ -81,9 +84,11 @@ Above is the basis of why we cam use MinHashing to calculate Jaccard similarity.
 **Problem:**
 Even though now we have signature matrix, it can substitute original binary matrix, and it has lower dimension.
 However, we still have billions, millions columns(documents), we cannot compare them all.
+
 **Solution:**
 Split signature vector to bands, if two documents have at least one identical band, they have the similarity(say above 80%) with the probability of p. (true positive)
 If two documents don't have any identical band, they have the similarity(say above 80%) with the probability of q. (false negative)
+
 **Goal:** We want p to be as high as possible, q to be as low as possible.
 
 What to do?
@@ -97,6 +102,7 @@ Our goal is any two columns have at least one band hashed into same bucket, the 
 #### Theoretical:
 N - The number of hash functions.
 N = b * r
+
 **Goal:** Find pairs that are at least s(say 80%) similarity.
 If two columns are 80% similarity, then the probability of the row are equal is also s.
 Prob. of that band are equal: $(s)^r$
