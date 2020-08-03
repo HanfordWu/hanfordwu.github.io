@@ -3,7 +3,9 @@ AOP: Aspect Oriented Programming
 ### Dynamic Proxy
 
 First, let's talk about Proxy pattern and decorator pattern:
+
 **Decorator pattern:** A is decorated by decorator B, then A is still A, but become stronger.
+
 **Proxy Pattern:** A is original object, B is another object and is a proxy of A, B strength the functionalities of A.
 
 Cons of Static proxy:
@@ -42,8 +44,9 @@ InterfaceA proxyB = (InterfaceA) Proxy.newProxyInstance(a.getclass().getClassLoa
     }
 })
 
-//Now we have the proxy B object, it has all the strengthened method.
 ```
+Now we have the proxy B object, it has all the strengthened method.
+
 The second way: based on subclass, omit it here.
 
 ### Spring AOP
@@ -119,4 +122,3 @@ Before advice methods add `@before(“pointcut expression")`
 Post advice methods add `@AfterReturning(“pointcut expression")`
 Error advice methods add `@AfterThrowing(“pointcut expression")`
 After advice methods add `@After(“pointcut expression")`
-
