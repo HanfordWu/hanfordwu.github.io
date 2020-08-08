@@ -1,6 +1,6 @@
 Spring Web MVC framework is designed around a DispatcherServlet that handles all the HTTP request and responses. The workflow of Spring MVC is showing here:
 
-![alt](../static/img/spring_dispatcherservlet.png)
+![alt](https://github.com/HanfordWu/hanfordwu.github.io/blob/master/static/img/spring_dispatcherservlet.png?raw=true)
 
 Following is the sequence of a request to DispatcherServlet:
 - Tomcat starts, find web.xml configuration, initiate DispatcherServlet. Often it maps to all url pattern: `/`
@@ -11,7 +11,7 @@ Following is the sequence of a request to DispatcherServlet:
 - Once the view is determined, DispatcherServlet pass the model data to view and rendered.
 
 All the mentioned components, i.e. HandlerMapping, Controller, ViewResolver are parts of WebApplicationContext, which is an extension of plain ApplicationContext with some extra necessary for web applications.
-![alt](..static/img/mvc-contexts.gif)
+![alt](https://github.com/HanfordWu/hanfordwu.github.io/blob/master/static/img/mvc-contexts.gif?raw=true)
 
 The configuration of those components can be done in springMVC.xml. But we need to tell DispatcherServlet where is it. 
 
