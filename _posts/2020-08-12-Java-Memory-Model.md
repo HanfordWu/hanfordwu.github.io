@@ -34,13 +34,82 @@ There are eight operations in JMM:
 - Store:  function on variables in working memory, copy it.
 - Write: function on variables in main memory, write the copied variable to main memory.
 
+All above operations are atomic.
+> **Atomic** means the operation will be complete once it starts.
+> **Visibility** means the change in one thread is visible for all other threads.
+> **Happen-before** Any operation that following **Happen-after** means that they have are following an order to do something.
+
+
 
 Keywords in Java regarding thread safety
 
-- volatile: variables that are marked as volatile, if the variable got changed in one thread, it will be updated instantly to main memory, and all its copy in other threads will be marked invalid, so next time other thread use it, they have to access main memory again. This is referring to the words **Visibility**
-- synchronized: can be added to function or blocks, means locked(monopoly) by one thread which get the "lock".
-- final: variables that are final
+- volatile: variables that are marked as volatile, if the variable got changed in one thread, it will be updated instantly to main memory, and all its copy in other threads will be marked invalid, so next time other thread use it, they have to access main memory again. This is referring to the words **Visibility**. It's **Visibility** and **Happen-before**.
+- synchronized: can be added to function or blocks, means locked(monopoly) by one thread which get the "lock". It is **Happen-before** and **Atomic**
+
+> volatile guarantee the **Visibility** of primary type, for reference type, volatile doesn't guarantee the referenced object is visible for all threads, Only guarantee the pointing itself visible.
 
 
 
-- JVM Model: JVM memory 分区.
+
+
+
+### JVM Model
+
+![alt](https://karppa.ch.files.1drv.com/y4mJpUW5-74VDJRHLlOLEb2OxCX0Gu3ZyApUs9Uhh_FqYI1rfpEwZYuJmdEUDAWnPiRnX2ZzEP9q8EKXLhvLH1fPKo9lHShnqfPxQB9uJx9HPs0JfAk17jbV60E4X76F8FNMa8jLgNuLVm8NZXLaFJj1deLBJZhCGvhXQIDOJ-kxhZi2PtnRZA9lK_wdSOhbnDoKw9jsaYrk1PGUbPYv44DEQ?width=766&height=350&cropmode=none)
+
+![alt](https://iqrppa.ch.files.1drv.com/y4m0dOwtd5SisFTEtT9C0XrMkd6efdlkSxGhwJNmuWtzbVl4eM62mKhrfUQASqeFAFjW3D0et0M4IwnWtrGTQic3x6RWDHdS1BlXny_8MHlvA5bxYWYD-T4NcWlX-jsrejZ-ncm-ncB-LLGukvhARx8JyJOVw1VMKOglRcTOMm98L8OnOlt-MNHXEq4ThcI11WYE2s7dTZeIZONmPDAp64egw?width=709&height=451&cropmode=none)
+
+##### Program Counter Register
+
+- thread private, each thread has one PC, its lifecycle is the same as the thread. 
+- If JVM is running java code, it points to current instruction address, if JVM is running native method it points to null.
+
+Errors: OutOfMemoryError
+
+##### JVM Stack
+
+- It's corresponding to thread stack in JMM
+- thread private, each thread has one PC, its lifecycle is the same as the thread.
+- each method has one stack frame, to store local variables, operation stack, dynamic links, method exit. etc.
+- local variables store kinds of primary type, reference type(points to heap). the size of local variable table is determined in compiling time and don't change when it's running.
+
+Errors:
+- StackOverflowError
+- OutOfMemoryError
+
+
+##### Native Method Stacks
+
+- similar to JVM stack, but for native methods
+
+Errors: StackOverflowError, OutOfMemoryError
+
+##### Heap
+
+- Shared by all threads
+- Not necessary to be consecutive address, can be extended dynamically.
+- In terms of GC, divided into Young generation, old generation, and Eden, From Survivor, To Survivor space. in new generation.
+
+Errors: OutOfMemoryError
+
+##### Method Area
+
+- Store class information, Constant, JIT compiled code, etc.
+- Not necessary to be consecutive address,can be extended dynamically.
+- GC mainly working on constant collecting and class unloading.
+
+**Runtime Constant Pool**
+
+- Part of Method Area
+- Store constants in class
+- String class' inter() to combine String constants
+
+##### Direct Memory
+
+- Not part of JVM, not any model of JMM, outside of JVM
+- For NIO to create Buffer, assigned by native function. Pointed by DirectByteBuffer in Java heap.
+
+
+> JIT - Just-in-tim compiler, javac compile .java file to .class file, (byte code).  JIT or Interpreter compile byte code to machine code. JIT is for enhance the speed of second compiling
+
+![alt](https://igrppa.ch.files.1drv.com/y4mYzKl6rKHiB5-4px4V6L4EZhxpVzg_Wus6tNVc43lwVE1fOvkZFYCQVjbhpm6sPIP95qLfb_bMvxsXjgrChNxZtS7B8gqdzFuTxO8pv9C2Tzw2Cb8PAtkYTXMr0RqCUZD6xIxalFcyxqCwhHryZaVza1j7n6liDy1aYiCMLDNw_D6HVppUFrjtUnl1elFuWrl0wf_KaL8O3rEXoRbkecabg?width=1389&height=967&cropmode=none)
