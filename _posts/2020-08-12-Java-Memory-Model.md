@@ -59,14 +59,14 @@ Keywords in Java regarding thread safety
 
 ![alt](https://iqrppa.ch.files.1drv.com/y4m0dOwtd5SisFTEtT9C0XrMkd6efdlkSxGhwJNmuWtzbVl4eM62mKhrfUQASqeFAFjW3D0et0M4IwnWtrGTQic3x6RWDHdS1BlXny_8MHlvA5bxYWYD-T4NcWlX-jsrejZ-ncm-ncB-LLGukvhARx8JyJOVw1VMKOglRcTOMm98L8OnOlt-MNHXEq4ThcI11WYE2s7dTZeIZONmPDAp64egw?width=709&height=451&cropmode=none)
 
-##### Program Counter Register
+#### Program Counter Register
 
 - thread private, each thread has one PC, its lifecycle is the same as the thread. 
 - If JVM is running java code, it points to current instruction address, if JVM is running native method it points to null.
 
 Errors: OutOfMemoryError
 
-##### JVM Stack
+#### JVM Stack
 
 - It's corresponding to thread stack in JMM
 - thread private, each thread has one PC, its lifecycle is the same as the thread.
@@ -78,21 +78,27 @@ Errors:
 - OutOfMemoryError
 
 
-##### Native Method Stacks
+#### Native Method Stacks
 
 - similar to JVM stack, but for native methods
 
 Errors: StackOverflowError, OutOfMemoryError
 
-##### Heap
+#### Heap
 
 - Shared by all threads
 - Not necessary to be consecutive address, can be extended dynamically.
 - In terms of GC, divided into Young generation, old generation, and Eden, From Survivor, To Survivor space. in new generation.
 
+Heap is where the object reside, one objects in heap includes the following information:
+- Object head information: 
+Mark Word(HashCode, GC age, lock status, etc.), and a pointer pointing to **Method Area** where has the class information. (and methods)
+- Instance Data: Object's non-static member and its value. including data member extends from superclass.
+- Aligned fill: fill extra data to be aligned.
+
 Errors: OutOfMemoryError
 
-##### Method Area
+#### Method Area
 
 - Store class information, Constant, JIT compiled code, etc.
 - Not necessary to be consecutive address,can be extended dynamically.
@@ -104,7 +110,33 @@ Errors: OutOfMemoryError
 - Store constants in class
 - String class' inter() to combine String constants
 
-##### Direct Memory
+**Method Table**
+In method area, each class has a method table, recording the entry of the implementation of the method.
+
+If we have a class `Dog`:
+```java
+public class Dog{
+    public String toString() {
+        return "I'm a Dog";
+    }
+
+    public void sayHello() {
+        System.out.println("sayHello");
+    }
+}
+```
+
+The object is in the heap, including non-static data member, 
+
+Whenever a non-private/static method of an object is called, the object is stored in heap, and it has the class pointer pointing to **Method Area** to find the class information, the class information has a **Method table**, find the same name and parameter entry, go to fetch instructions into JVM stack, then start to run methods.
+
+
+
+![alt](https://kqpqsq.ch.files.1drv.com/y4mR06b7-uo_DfTxp-H9PeA3s65B9UCmxZz5A6ZiPBnQWJlOslGP2h77qf7EqlPWWK5XhkrDfKpP0uRi8HGmVbh7i5-OrMhoLGJo2wo1jkiJs1vvLWwSHpXwtewDMmSkyARkdh3k34MTznPEJCE_lB9ktQX1X0r99s6PpGlzQDbH83a889pLuaaRaA4-2JB6f0J_0d1p76gj1XGRzvPmUwWoA?width=400&height=283&cropmode=none)
+
+
+
+#### Direct Memory
 
 - Not part of JVM, not any model of JMM, outside of JVM
 - For NIO to create Buffer, assigned by native function. Pointed by DirectByteBuffer in Java heap.
