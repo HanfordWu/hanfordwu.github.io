@@ -35,7 +35,7 @@ Very similar to SOA, but some specifications:
 - High extensible
 
 **Dubbo architecture:**
-![alt](https://upload-images.jianshu.io/upload_images/1765294-a09997cd3fa9e449.png?imageMogr2/auto-orient/strip|imageView2/2/w/701/format/webp)
+![alt](https://lapqsq.ch.files.1drv.com/y4mVPleRefZlS6tgDvsizKj8SbN5ZXb8EC3xikLRtjD1gwbCePrZvqhVoO_Q_fqKTyDZzlGny9ONbecZvI--wQ2NIAIH7Ia-RpTTbvzBulwxhNpGOSXvBKIP_k5lxUYbJcNMGG9zpzg_bodoBkCl8v7iD1OAd5IakWaQ8W9Re6BYk5chIkJrYOnhyKVnmAr0lNpZkpdw6Cx3fmoQDh-BvaxZA?width=701&height=430&cropmode=none)
 
 - Service provider
 - Consumer
@@ -44,7 +44,7 @@ Very similar to SOA, but some specifications:
 - Container
 
 **SpringCloud:**
-![alt](https://upload-images.jianshu.io/upload_images/1765294-1a0931e21e14a817.png?imageMogr2/auto-orient/strip|imageView2/2/w/798/format/webp)
+![alt](https://jqpqsq.ch.files.1drv.com/y4m9KAjO5D7lPCX8YhqjOtHG70Mfm83gfNs9AYWEhiFLB3Hj2OxLmCO0uYCK6qDPc0cNiSWDQA1Hmkiw-LBxcwCOgMNyZ9WInofPdQc2-XgZW3SFK9WuhslxdzoBycJuiUZ9vxukU47r3BQ5_A-xC7m4706jQEo-qNXEJ8T7izpgqdhuF6VUKlmGRr8Vde9FFbc4UTcRcRpM2Aw2N6Ze9KD0g?width=701&height=430&cropmode=none)
 
 ## Two ways of procedure invocation
 - Remote Procedure Call(RPC): Customized data format, based on native TCP, fast, efficient.
