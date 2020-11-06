@@ -1,5 +1,5 @@
 
-First, I like to review something:
+First, review something:
 
 ![alt](https://www.tutorialspoint.com/java/images/exceptions1.jpg)
 
@@ -20,23 +20,32 @@ Error:
 6.  ...
 
 Exception:
-1. ClassCastException
-2. IndexOutOfBoundsException
-3. NullPointerException
-4. ArrayStoreException
-5. ...
+1. ClassCastException(runtime exception)
+2. IndexOutOfBoundsException(runtime exception)
+3. NullPointerException(runtime exception)
+4. ArrayStoreException(runtime exception)
+5. ClassNotFoundException(compile time exception)
+6. IOException(compile time exception)
 
-
-6. What is the difference between runtime Exception and non-runtime Exception?
+-------
+2. What is the difference between runtime Exception(unchecked exception) and compile-time Exception(checked exception)?
 
 The compiler cannot detect runtime Exception, but can detect non-runtime Exception. If program has runtime Exception, that is programmer's fault for sure.
 
-For non-runtime Exception, if no try-catch, and no throws declaration, then it cannot be compiled. This Exception is often caused by the environment outside of program, like no file.
+For non-runtime Exception, It is mandatory to provide try-catch or try finally block to handle checked Exception and if not to do so, it cannot be compiled. This Exception is often caused by the environment outside of program, like no file.
 
 
 3. What's the difference of throw and throws?
 
 Throw can be used inside of methods. Throws is used on methods' signature.
+
+4. For customer's exception, it should extend runtime exception or compile time exception?
+
+If a method is likely to fail and chances of failure is more than 50% it should throw Checked Exception to ensure alternate processing in case it failed. Otherwise use runtime exception.
+
+
+Actually, we should handle all the possible exceptions, but it's impossible make all exception be checked by compiler, so compiler only alert the checked exception. For unchecked exception, the checking should be done by programmer when they think it's possible and necessary.
+
 
 
 ### How JVM handle Exception?
@@ -145,6 +154,9 @@ When does JVM exit?
 
 JVM will exit after all non-daemon thread exit. By default, all threads are non-daemon.
 
+Regarding JVM:
+
+> Uncaught exceptions are handled in shutdown hooks just as in any other thread, by invoking the uncaughtException method of the thread’s ThreadGroup object. The default implementation of this method prints the exception’s stack trace to System.err and terminates the thread; it does not cause the virtual machine to exit or halt.
 
 
 
