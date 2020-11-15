@@ -151,7 +151,7 @@ Above pom bind the "query" goal with "test" phase. Whenever the test phase is ru
 
 The following is the relationship of Lifecycle, phase and goal:
 
-![alt](https://upload-images.jianshu.io/upload_images/1312339-adb4a573a6e30c21.png?imageMogr2/auto-orient/strip|imageView2/2/w/703/format/webp)
+![alt](https://upload-images.jianshu.io/upload_images/1312339-adb4a573a6e30c21.png)
 
 
 
@@ -161,7 +161,7 @@ Here is an example of building a project:
 
 The structure of the example project is:
 
-![alt](https://upload-images.jianshu.io/upload_images/1312339-811cadd3d03e512e.png?imageMogr2/auto-orient/strip|imageView2/2/w/523/format/webp)
+![alt](https://upload-images.jianshu.io/upload_images/1312339-811cadd3d03e512e.png)
 
 A project is called echo, it has two modules: api, biz. pom.xml of echo is:
 
@@ -479,3 +479,316 @@ Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
 It shows that it's building echo, api, biz, and because api is a dependency of biz, so api need to build first. 
 
 When to build each module, run all the goals of phases of Lifecycle.
+
+
+### Dependency Management
+
+Maven dependency management save developers' time. We don't have to go to our dependencies' website to download, and put them into our classpath. Just only have to declare the coordinate of dependencies:
+
+```xml
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-web</artifactId>
+    <version>4.2.7.RELEASE</version>
+
+    <type>jar</type>
+    <scope>compile</scope>
+    <optional>false</optional>
+    <exclusions>
+        <exclusion>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+```
+
+- Transitive dependencies
+
+Maven is able to load the dependencies of our dependencies:
+> This allows you to avoid needing to discover and specify the libraries that your own dependencies require, and including them automatically
+
+e.g. Our project depends on spring-core, spring-core depends on commons-logging.
+
+- Dependency conflict
+
+Our project depends on library A version 1.0, and library B, library B also depends on library A version 2.0. In this case we have a dependency conflict.
+
+Two approaches for conflict: 1. Nearer path. 2. First declaration.
+
+
+Attributes of dependencies:
+
+| Elements                        | Description                                                                                                                       | Ext                                                                                                                                                                     |
+|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| groupId、artifactId and version | Base coordinate                                                                                                                   |                                                                                                                                                                         |
+| type                            | Type of the dependency                                                                                                            | Default is jar                                                                                                                                                          |
+| scope                           | Ton control the relationship of the dependency with three type of classpath: compile classpath、Test classpath、running classpath | 包含compile、provided、runtime、test、system和import 6种, 详见:Dependency Scope.                                                                                        |
+| optional                        | Whether the dependency is optional.                                                                                               | e.g. A jar package may support both MySQL and Oracle, so two drivers must be loaded, but for a user, they only need one, so they can use optional option to select one. |
+| exclusions                      | Exclude transitive dependency                                                                                                     | when there is dependency conflict, this tag can exclude the conflicted dependency.                                                                                      |
+
+
+
+- Dependency management
+
+Maven provide plugin to check all dependencies: `mvn dependency: tree`
+
+### Maven Repository
+
+> In Maven, all the output of building are called artifact. Maven repository is used to store those artifacts.
+
+Two kinds of repository:
+
+- Local Repository: Default path is `~/.m2/, maven can only use artifacts that in local repository.
+- Remote Repository: 
+  At beginning, local repository is empty, so local maven must download artifacts from remote repository. Two kinds of remote repository:
+  - Central Repository
+  - Private repository
+
+#### Private repository
+
+Private repository is a special remote repository, it is set in LAN, and it's the proxy of central repository.
+
+When local repository needs a dependency, it will ask from private repository, if private repository don't have, private repository will ask from central repository. On the other hand, some artifacts that are not in central repository, people can upload to private repository, so that LAN users can share the artifacts.
+
+
+#### Customized Bind
+
+Except default bind, user may add extra goals to phases. E.g. maven-source-plugin's goal: jar-no-fork, it can package source code into jar file. Then we bind the goal to `verify` phase.
+
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+                <execution>
+                    <id>attach-sources</id>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>jar-no-fork</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+
+`executions` may have multiple `execution`, each execution is a goal.
+
+
+
+#### Maven plugin develop
+
+Most of the time, we don't need develop ourselves plugin, but this example will help me understand maven.
+
+This example is going to develop a maven plugin called **hanford-maven-plugin**.
+1. Create plugin project.
+`maven-archetype-plugin` can created a plugin project quickly.
+
+Run command `mvn archetype:generate`
+
+Then provide parameters:
+
+```xml
+-DgroupId=com.fq.plugins
+-DartifactId=hanford-maven-plugin 
+-Dversion=0.0.1-SNAPSHOT
+-DarchetypeArtifactId=maven-archetype-plugin 
+-DinteractiveMode=false 
+-DarchetypeCatalog=internal
+```
+
+Plugin itself is also a maven project, but the packaging is `maven-plugin`
+
+The pom.xml is like:
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.fq.plugins</groupId>
+    <artifactId>lc-maven-plugins</artifactId>
+    <packaging>maven-plugin</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>3.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>3.3</version>
+        </dependency>
+    </dependencies>
+
+</project>
+```
+
+2. Create Mojo
+
+A plugin is a distribution of one or more related mojos.
+
+```java
+@Mojo(name = "hanford", defaultPhase = LifecyclePhase.VERIFY)
+public class HanfordMavenMojo extends AbstractMojo {
+
+    private static final List<String> DEFAULT_FILES = Arrays.asList("java", "xml", "properties");
+
+    @Parameter(defaultValue = "${project.basedir}", readonly = true)
+    private File baseDir;
+
+    @Parameter(defaultValue = "${project.build.sourceDirectory}", readonly = true)
+    private File srcDir;
+
+    @Parameter(defaultValue = "${project.build.testSourceDirectory}", readonly = true)
+    private File testSrcDir;
+
+    @Parameter(defaultValue = "${project.build.resources}", readonly = true)
+    private List<Resource> resources;
+
+    @Parameter(defaultValue = "${project.build.testResources}", readonly = true)
+    private List<Resource> testResources;
+
+    @Parameter(property = "lc.file.includes")
+    private Set<String> includes = new HashSet<>();
+
+    private Log logger = getLog();
+
+    @Override
+    public void execute() throws MojoExecutionException, MojoFailureException {
+        if (includes.isEmpty()) {
+            logger.debug("includes/lc.file.includes is empty!");
+            includes.addAll(DEFAULT_FILES);
+        }
+        logger.info("includes: " + includes);
+
+        try {
+            long lines = 0;
+            lines += countDir(srcDir);
+            lines += countDir(testSrcDir);
+
+            for (Resource resource : resources) {
+                lines += countDir(new File(resource.getDirectory()));
+            }
+            for (Resource resource : testResources) {
+                lines += countDir(new File(resource.getDirectory()));
+            }
+
+            logger.info("total lines: " + lines);
+        } catch (IOException e) {
+            logger.error("error: ", e);
+            throw new MojoFailureException("execute failure: ", e);
+        }
+    }
+
+    private LineProcessor<Long> lp = new LineProcessor<Long>() {
+
+        private long line = 0;
+
+        @Override
+        public boolean processLine(String fileLine) throws IOException {
+            if (!Strings.isNullOrEmpty(fileLine)) {
+                ++this.line;
+            }
+            return true;
+        }
+
+        @Override
+        public Long getResult() {
+            long result = line;
+            this.line = 0;
+            return result;
+        }
+    };
+
+
+    private long countDir(File directory) throws IOException {
+        long lines = 0;
+        if (directory.exists()) {
+            Set<File> files = new HashSet<>();
+            collectFiles(files, directory);
+
+            for (File file : files) {
+                lines += CharStreams.readLines(new FileReader(file), lp);
+            }
+
+            String path = directory.getAbsolutePath().substring(baseDir.getAbsolutePath().length());
+            logger.info("path: " + path + ", file count: " + files.size() + ", total line: " + lines);
+            logger.info("\t-> files: " + files.toString());
+        }
+
+        return lines;
+    }
+
+    private void collectFiles(Set<File> files, File file) {
+        if (file.isFile()) {
+            String fileName = file.getName();
+            int index = fileName.lastIndexOf(".");
+            if (index != -1 && includes.contains(fileName.substring(index + 1))) {
+                files.add(file);
+            }
+        } else {
+            File[] subFiles = file.listFiles();
+            for (int i = 0; subFiles != null && i < subFiles.length; ++i) {
+                collectFiles(files, subFiles[i]);
+            }
+        }
+    }
+}
+```
+
+- `@Parameter` provide Mojo parameter. Most Maven plugin is configurable, so by parameter, user can define behavior of plugin.
+
+```xml
+<plugin>
+    <groupId>com.fq.plugins</groupId>
+    <artifactId>lc-maven-plugins</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <executions>
+        <execution>
+            <id>lc</id>
+            <phase>verify</phase>
+            <goals>
+                <goal>lc</goal>
+            </goals>
+            <configuration>
+                <includes>
+                    <include>java</include>
+                    <include>lua</include>
+                    <include>json</include>
+                    <include>xml</include>
+                    <include>properties</include>
+                </includes>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+
+- `execute()`: Execute plugin functionality.
+- Exception: `execute()` may have two kinds of exceptions:
+  - `MojoExecutionException`
+  - `MojoFailureException`
+
+3. Test && Run
+
+`mvn clean install` can install plugin to repository, then we can use it in other maven project:
+
+`mvn com.fq.plugins:lc-maven-plugins:0.0.1-SNAPSHOT:lc [-Dlc.file.includes=js,lua] [-X]`
