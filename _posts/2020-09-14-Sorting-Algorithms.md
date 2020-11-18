@@ -22,7 +22,7 @@ Description:
 - Repeat above three steps;
 
 Gif:
-![alt](https://images2017.cnblogs.com/blog/849589/201710/849589-20171015223238449-2146169197.gif)
+![alt](https://www.runoob.com/wp-content/uploads/2019/03/bubbleSort.gif)
 
 Implementation:
 
@@ -56,7 +56,7 @@ But actually, we don't have to move it step by step. We can keep the greatest in
 Or, we can find the smallest, assign it to the head.
 
 Gif:
-![alt](https://images2017.cnblogs.com/blog/849589/201710/849589-20171015224719590-1433219824.gif)
+![alt](https://www.runoob.com/wp-content/uploads/2019/03/selectionSort.gif)
 
 Implementation:
 
@@ -101,7 +101,7 @@ Description:
 - If the element is smaller than current element, insert current to after the element.
 - Repeat step 2-4.
 
-![alt](https://images2017.cnblogs.com/blog/849589/201710/849589-20171015225645277-1151100000.gif)
+![alt](https://www.runoob.com/wp-content/uploads/2019/03/insertionSort.gif)
 
 Implementation:
 
@@ -154,7 +154,7 @@ Description:
 
 Gif:
 
-![alt](https://images2018.cnblogs.com/blog/849589/201803/849589-20180331170017421-364506073.gif)
+![alt](https://www.programmersought.com/images/661/3b3a42d516614222b9244f13a4efa06d.gif)
 
 Implementation:
 
@@ -219,6 +219,9 @@ Description:
 - If sub-array.length != 1, recursively do splitting
 - If sub-array.length == 1, merge two arrays.
 - Above steps are recursive.
+
+Gif:
+![alt](https://www.runoob.com/wp-content/uploads/2019/03/mergeSort.gif)
 
 Implementation: (Switch to python)
 
