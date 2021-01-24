@@ -13,12 +13,12 @@ For a regular array, if we want to update a sequence of elements, we have to upd
 If we have a binary indexed array, we only have to update two elements: the first one and the one after them.
 
 ### Looks like
-![alt](https://img2018.cnblogs.com/blog/1448672/201810/1448672-20181003121604644-268531484.png)
+![alt](https://i.imgur.com/AlLVNQK.png)
 
 Black boxes are original regular array.
 
 Red boxes are built binary indexed tree array.
-
+```
 C[1] = A[1];
 C[2] = A[1] + A[2];
 C[3] = A[3];
@@ -27,6 +27,7 @@ C[5] = A[5];
 C[6] = A[5] + A[6];
 C[7] = A[7];
 C[8] = A[1] + A[2] + A[3] + A[4] + A[5] + A[6] + A[7] + A[8];
+```
 
 So what is the pattern?
 
